@@ -1,0 +1,197 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Megrim&display=swap");
+button,
+input,
+textarea,
+a,
+input::placeholder {
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+
+a,
+button,
+input[type=submit] {
+  cursor: pointer;
+}
+
+q:before {
+  content: "« ";
+}
+
+q:after {
+  content: " »";
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+}
+
+img {
+  max-width: 100%;
+}
+
+header {
+  height: 15vh;
+  padding: 2rem 4rem !important;
+  background: #86e387;
+  display: flex;
+}
+header h1 {
+  color: #ffffff;
+  font: 3.5rem "Dancing Script";
+}
+header h2 {
+  margin: 1.5rem 0 2rem 40%;
+}
+
+#records {
+  padding: 3rem 5rem;
+}
+#records > h1 {
+  margin-bottom: 5rem;
+  font: 900 3.75rem "Megrim";
+  text-transform: uppercase;
+  color: #008b01;
+  text-shadow: 3px 3px 0px #86e387;
+  text-align: center;
+}
+#records article {
+  width: 50%;
+  margin: 1.5rem auto;
+  display: flex;
+  justify-content: space-between;
+  font-family: Megrim;
+  color: #008b01;
+}
+#records article > h1 {
+  font-size: 1.875rem;
+}
+#records article > h2 {
+  font-size: 2.8125rem;
+}
+
+#grid {
+  margin: 5vh 30%;
+  display: grid;
+  grid-template-columns: repeat(6, 100px);
+  gap: 2rem;
+}
+
+button {
+  position: relative;
+  width: 300px;
+  height: 80px;
+  margin: 4rem auto 0;
+  background: transparent;
+  display: block;
+}
+button::before {
+  content: "";
+  position: absolute;
+  width: 80px;
+  height: 20px;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: transparent;
+  border-radius: 15px;
+  transition: 0.7s;
+}
+button::after {
+  content: "";
+  position: absolute;
+  width: 80px;
+  height: 20px;
+  left: 50%;
+  bottom: -10px;
+  transform: translateX(-50%);
+  background: transparent;
+  border-radius: 15px;
+  transition: 0.7s;
+}
+button a {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 300px;
+  height: 80px;
+  padding-top: 1.4rem;
+  background: #ffc700;
+  font: 900 1.9375rem "Megrim";
+  border-radius: 0.9375rem;
+  text-shadow: 1px 1px 0px #000000, 2px 2px 0px #000000;
+  transition: 1s;
+  z-index: 1;
+  backdrop-filter: blur(100px);
+  overflow: hidden;
+  border-bottom: 3px solid transparent;
+  border-right: 1px solid transparent;
+  border-left: 1px solid transparent;
+  border-top: 1px solid transparent;
+}
+button:hover::after {
+  width: 105%;
+  height: 60px;
+  bottom: -5px;
+  background: #86e387;
+  box-shadow: 0 0 5px #86e387, 0 0 15px #86e387, 0 0 30px #86e387, 0 0 60px #86e387;
+}
+button:hover::before {
+  width: 105%;
+  height: 60px;
+  top: -5px;
+  background: #86e387;
+  box-shadow: 0 0 5px #86e387, 0 0 15px #86e387, 0 0 30px #86e387, 0 0 60px #86e387;
+}
+button:hover a {
+  background: transparent;
+  transform: scale(1.01);
+  border-bottom: 3px solid #000000;
+  border-right: 1px solid #000000;
+  border-left: 1px solid #000000;
+  border-top: 1px solid #000000;
+}
+
+.card, .backcard {
+  width: 100px;
+  height: 100px;
+  border-radius: 15px;
+}
+
+.backcard {
+  background: #86e387 !important;
+  transition: 1.5s;
+}
+
+.flip {
+  animation: flip 1 1s;
+}
+
+@keyframes flip {
+  0% {
+    background: #86e387;
+    transform: rotateY(2turn);
+    box-shadow: 0 0 5px #86e387, 0 0 15px #86e387, 0 0 30px #86e387, 0 0 60px #86e387;
+  }
+  50% {
+    box-shadow: none;
+  }
+  100% {
+    box-shadow: none;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

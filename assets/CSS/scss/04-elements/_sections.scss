@@ -1,0 +1,33 @@
+#records {
+  padding: 3rem 5rem;
+  > h1 {
+    margin-bottom: 5rem;
+    font: 900 rem(60) $font-primary;
+    text-transform: uppercase;
+    color: $green-font;
+    text-shadow: 3px 3px 0px $green;
+    text-align: center;
+  }
+  article {
+    width: 50%;
+    margin: 1.5rem auto;
+    display: flex;
+    justify-content: space-between;
+    font-family: Megrim;
+    color: $green-font;
+
+    > h1 {
+      font-size: rem(30);
+    }
+    > h2 {
+      font-size: rem(45);
+    }
+  }
+}
+
+#grid {
+  margin: 5vh 30%;
+  display: grid;
+  grid-template-columns: repeat(6, 100px);
+  gap: 2rem;
+}

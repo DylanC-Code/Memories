@@ -1,0 +1,82 @@
+button {
+  position: relative;
+  width: 300px;
+  height: 80px;
+  margin: 4rem auto 0;
+  background: transparent;
+  display: block;
+  &::before {
+    content: "";
+    position: absolute;
+    width: 80px;
+    height: 20px;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: transparent;
+    // box-shadow: 0 0 5px $green, 0 0 15px $green, 0 0 30px $green,
+    //   0 0 60px $green;
+    border-radius: 15px;
+    transition: 0.7s;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    width: 80px;
+    height: 20px;
+    left: 50%;
+    bottom: -10px;
+    transform: translateX(-50%);
+    background: transparent;
+    border-radius: 15px;
+    transition: 0.7s;
+  }
+
+  a {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 300px;
+    height: 80px;
+    padding-top: 1.4rem;
+    background: $gold;
+    font: 900 rem(31) "Megrim";
+    border-radius: rem(15);
+    text-shadow: 1px 1px 0px $black, 2px 2px 0px $black;
+    transition: 1s;
+    z-index: 1;
+    backdrop-filter: blur(100px);
+    overflow: hidden;
+    border-bottom: 3px solid transparent;
+    border-right: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-top: 1px solid transparent;
+  }
+
+  &:hover {
+    &::after {
+      width: 105%;
+      height: 60px;
+      bottom: -5px;
+      background: $green;
+      box-shadow: 0 0 5px $green, 0 0 15px $green, 0 0 30px $green,
+        0 0 60px $green;
+    }
+    &::before {
+      width: 105%;
+      height: 60px;
+      top: -5px;
+      background: $green;
+      box-shadow: 0 0 5px $green, 0 0 15px $green, 0 0 30px $green,
+        0 0 60px $green;
+    }
+    & a {
+      background: transparent;
+      transform: scale(1.01);
+      border-bottom: 3px solid $black;
+      border-right: 1px solid $black;
+      border-left: 1px solid $black;
+      border-top: 1px solid $black;
+    }
+  }
+}

@@ -1,0 +1,42 @@
+button,
+input,
+textarea,
+a,
+input::placeholder {
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+
+a,
+button,
+input[type="submit"] {
+  cursor: pointer;
+}
+
+q:before {
+  content: "« ";
+}
+
+q:after {
+  content: " »";
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+}
+
+img {
+  max-width: 100%;
+}

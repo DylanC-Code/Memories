@@ -1,0 +1,27 @@
+.card {
+  width: 100px;
+  height: 100px;
+  border-radius: 15px;
+}
+.backcard {
+  @extend .card;
+  background: $green !important;
+  transition: 1.5s;
+}
+.flip {
+  animation: flip 1 1s;
+}
+@keyframes flip {
+  0% {
+    background: $green;
+    transform: rotateY(2turn);
+    box-shadow: 0 0 5px $green, 0 0 15px $green, 0 0 30px $green,
+      0 0 60px $green;
+  }
+  50% {
+    box-shadow: none;
+  }
+  100% {
+    box-shadow: none;
+  }
+}
