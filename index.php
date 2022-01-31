@@ -12,6 +12,7 @@
   <body>
     <header>
       <h1>Memories</h1>
+      <h2></h2>
     </header>
     <main>
       <!-- <section id="records">

@@ -180,6 +180,11 @@ button:hover a {
   animation: flip 1 1s;
 }
 
+.win {
+  animation: win 2s 1;
+  pointer-events: none;
+}
+
 @keyframes flip {
   0% {
     background: #86e387;
@@ -191,6 +196,23 @@ button:hover a {
   }
   100% {
     box-shadow: none;
+  }
+}
+@keyframes win {
+  0% {
+    top: 0%;
+    transform: rotateY(0);
+  }
+  25% {
+    top: 25%;
+    transform: rotateY(1.5turn) scale(1.02);
+  }
+  75% {
+    top: 50%;
+    transform: rotateY(1.5turn) scale(1.05);
+  }
+  100% {
+    visibility: hidden;
   }
 }
 

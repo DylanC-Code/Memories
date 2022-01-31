@@ -1,4 +1,5 @@
 let fruits = [];
+let cardsFlip = [];
 let longueur = fruits.length;
 let clicked, clicked2, elements;
 
@@ -30,7 +31,7 @@ function randomizeArray(array) {
 function generateCards() {
   for (let i = 0; i < 18; i++) {
     card = document.createElement("div");
-    card.setAttribute("value", i);
+    card.setAttribute("value", i + 1);
     card.style.background = `0% ${
       100 * -i
     }px no-repeat url(./assets/medias/fruits/cards.png)`;
@@ -53,6 +54,7 @@ function generateCards() {
 function flipCards(card) {
   card.classList.toggle("flip");
   card.classList.toggle("backcard");
+  console.log(card);
 }
 
 // ! No stress for write this
@@ -61,42 +63,40 @@ function flipCards(card) {
 function checkCards(card) {
   if (!clicked) {
     clicked = card.srcElement.attributes.value.value;
-    // console.log(clicked);
   } else if (clicked && !clicked2) {
     clicked2 = card.srcElement.attributes.value.value;
-    win = [...document.querySelectorAll(`*[value='${clicked}']`)];
-    // console.log(clicked2);
 
-    if (clicked !== clicked2) {
-      // console.log("pas pareil");
-      elements = [...document.querySelectorAll(".flip")];
+    if (clicked === clicked2) {
+      for (h = 0; h < 2; h++) {
+        cardsFlip[h].classList.remove("flip");
+        cardsFlip[h].classList.add("win");
+      }
+    } else if (clicked !== clicked2) {
       setTimeout(() => {
-        flipCards(elements[0]);
-        flipCards(elements[1]);
+        flipCards(cardsFlip[0]);
+        flipCards(cardsFlip[1]);
       }, 1500);
-    } else {
-      setTimeout(() => {
-        for (b = 0; b < win.length; b++) {
-          win[b].style.background();
-        }
-      }, 2000);
     }
-    clicked = null;
-    clicked2 = null;
-
-    // clicked = null;
-    // clicked2 = null;
+    setTimeout(() => {
+      cardsFlip = [];
+      clicked = null;
+      clicked2 = null;
+    }, 1600);
   }
 }
 
 // TODO EXECUTIONS
 // TODO EXECUTIONS
 // TODO EXECUTIONS
+
 generateCards();
 
 fruits.forEach((fruit) => {
   fruit.addEventListener("click", (e) => {
-    flipCards(fruit);
-    checkCards(e);
+    if (cardsFlip.length < 2) {
+      cardsFlip.push(fruit);
+      flipCards(fruit);
+      checkCards(e);
+    }
   });
 });

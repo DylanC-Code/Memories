@@ -1,4 +1,4 @@
-<?php require_once 'C:\Users\Stagiaire\Desktop\memories_game\assets\tools\connect.php';
+<?php require_once 'C:\Users\Stagiaire\Desktop\Memories\assets\tools\connect.php';
 
 $query = $db->query("SELECT `record`, `date` FROM `records` ORDER BY `record` LIMIT 5")->fetchAll();
 ob_start();
