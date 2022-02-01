@@ -1,7 +1,14 @@
+//* *********** *//
+//* DECLARATION *//
+//* *********** *//
+const header = document.querySelector("header");
+const startButton = document.querySelector("button");
+
 let fruits = [];
 let cardsFlip = [];
 let longueur = fruits.length;
 let clicked, clicked2, elements;
+let timeInt;
 
 //? ???????? ?//
 //? FUNCTION ?//
@@ -9,11 +16,16 @@ let clicked, clicked2, elements;
 
 // * An algorythm for shuffle an array
 // * Create by myself
-
+function launchGame() {
+  game_section = document.createElement("section");
+  game_section.setAttribute("id", "grid");
+  document.querySelector("body").appendChild(game_section);
+  document.querySelector("#records").remove();
+}
 function randomizeArray(array) {
   let l = array.length;
 
-  for (i = 0; i !== 200; i++) {
+  for (i = 0; i !== 1000; i++) {
     let ud = Math.random() > 0.5 ? true : false;
     let hm = Math.ceil(Math.random() * l);
     let oi = Math.floor(Math.random() * l);
@@ -54,29 +66,32 @@ function generateCards() {
 function flipCards(card) {
   card.classList.toggle("flip");
   card.classList.toggle("backcard");
-  console.log(card);
 }
 
-// ! No stress for write this
-// ! No stress for write this
+// ! No stress for read this
 
-function checkCards(card) {
+function checkCard(clicked, clicked2) {
+  if (clicked === clicked2) {
+    document.getElementById("left").textContent++;
+    for (h = 0; h < 2; h++) {
+      cardsFlip[h].classList.remove("flip");
+      cardsFlip[h].classList.add("win");
+    }
+  } else if (clicked !== clicked2) {
+    setTimeout(() => {
+      flipCards(cardsFlip[0]);
+      flipCards(cardsFlip[1]);
+    }, 1500);
+  }
+}
+
+function checkCliked(card) {
   if (!clicked) {
     clicked = card.srcElement.attributes.value.value;
   } else if (clicked && !clicked2) {
     clicked2 = card.srcElement.attributes.value.value;
 
-    if (clicked === clicked2) {
-      for (h = 0; h < 2; h++) {
-        cardsFlip[h].classList.remove("flip");
-        cardsFlip[h].classList.add("win");
-      }
-    } else if (clicked !== clicked2) {
-      setTimeout(() => {
-        flipCards(cardsFlip[0]);
-        flipCards(cardsFlip[1]);
-      }, 1500);
-    }
+    checkCard(clicked, clicked2);
     setTimeout(() => {
       cardsFlip = [];
       clicked = null;
@@ -84,19 +99,59 @@ function checkCards(card) {
     }, 1600);
   }
 }
+function timer() {
+  const timer = document.createElement("h2");
+  timer.innerHTML = "<span id='minutes'></span> : <span id='seconds'></span>";
+  header.appendChild(timer);
 
-// TODO EXECUTIONS
-// TODO EXECUTIONS
-// TODO EXECUTIONS
+  const minutes = document.getElementById("minutes");
+  const seconds = document.getElementById("seconds");
+  timeInt = setInterval(() => {
+    seconds.textContent++;
+    maxSec = parseInt(seconds.textContent);
 
-generateCards();
-
-fruits.forEach((fruit) => {
-  fruit.addEventListener("click", (e) => {
-    if (cardsFlip.length < 2) {
-      cardsFlip.push(fruit);
-      flipCards(fruit);
-      checkCards(e);
+    if (maxSec === 60) {
+      seconds.textContent = 0;
+      minutes.textContent++;
     }
+  }, 1000);
+}
+function evenLeft() {
+  var scores = document.createElement("h3");
+  scores.innerHTML = "<span id='left'></span> / 18";
+  header.appendChild(scores);
+
+  cardLeft = document.getElementById("left");
+  cardLeft.textContent = 0;
+}
+function endGame() {
+  clearInterval(timeInt);
+  document.querySelector("header > h1").style.color = "#ffc700";
+}
+// TODO EXECUTIONS
+// TODO EXECUTIONS
+// TODO EXECUTIONS
+// Create game section and remove records section
+startButton.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  launchGame();
+  generateCards();
+});
+// Create timer & scoresbord
+startButton.addEventListener("click", () => {
+  fruits.forEach((fruit) => {
+    fruit.addEventListener("click", (e) => {
+      if (cardsFlip.length < 2) {
+        cardsFlip.push(fruit);
+        flipCards(fruit);
+        checkCliked(e);
+        document.getElementById("left").textContent === "1"
+          ? endGame()
+          : console.log(left);
+      }
+    });
   });
+  timer();
+  evenLeft();
 });

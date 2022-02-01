@@ -3,11 +3,19 @@ header {
   padding: 2rem 4rem !important;
   background: $green;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   h1 {
     color: $white;
     font: 3.5rem $font-secondary;
   }
   h2 {
-    margin: 1.5rem 0 2rem 40%;
+    // margin: 1.5rem 0 2rem 38%;
+    color: $white;
+    font: 3.5rem $font-primary;
+  }
+  h3 {
+    @extend h2;
   }
 }

@@ -12,14 +12,12 @@
   <body>
     <header>
       <h1>Memories</h1>
-      <h2></h2>
     </header>
     <main>
-      <!-- <section id="records">
+      <section id="records">
         <h1>Top 5</h1>
         <?=$records?>
-      </section> -->
-      <section id="grid"></section>
+      </section>
     </main>
   </body>
 </html>
