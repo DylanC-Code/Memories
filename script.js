@@ -1,27 +1,49 @@
-//* *********** *//
-//* DECLARATION *//
-//* *********** *//
+//~ ~~~~~~~~~~~ ~//
+//~ DECLARATION ~//
+//~ ~~~~~~~~~~~ ~//
 const header = document.querySelector("header");
+const h2 = document.querySelector("header > h2");
+const h3 = document.querySelector("header > h3");
+const main = document.querySelector("main");
 const startButton = document.querySelector("button");
 
 let fruits = [];
 let cardsFlip = [];
 let longueur = fruits.length;
-let clicked, clicked2, elements;
-let timeInt;
+let clicked, clicked2, timeInt;
 
-//? ???????? ?//
-//? FUNCTION ?//
-//? ???????? ?//
+//^ ^^^^^^^^ ^//
+//^ FUNCTION ^//
+//^ ^^^^^^^^ ^//
 
-// * An algorythm for shuffle an array
-// * Create by myself
+//~ MASTER FUNCTIONS
 function launchGame() {
   game_section = document.createElement("section");
   game_section.setAttribute("id", "grid");
   document.querySelector("body").appendChild(game_section);
   document.querySelector("#records").remove();
+  fruits = [];
+
+  generateCards();
 }
+function gameLogic() {
+  fruits.forEach((fruit) => {
+    fruit.addEventListener("click", (e) => {
+      if (cardsFlip.length < 2) {
+        cardsFlip.push(fruit);
+        flipCards(fruit);
+        checkCliked(e);
+      }
+    });
+  });
+}
+function hud() {
+  timer();
+  evenLeft();
+}
+
+//~ ROOT FUNCTIONS
+// * An algorythm for shuffle an array(create by myself)
 function randomizeArray(array) {
   let l = array.length;
 
@@ -68,8 +90,7 @@ function flipCards(card) {
   card.classList.toggle("backcard");
 }
 
-// ! No stress for read this
-
+//* Check matching cards 1
 function checkCard(clicked, clicked2) {
   if (clicked === clicked2) {
     document.getElementById("left").textContent++;
@@ -84,7 +105,7 @@ function checkCard(clicked, clicked2) {
     }, 1000);
   }
 }
-
+//* Check matching cards 2
 function checkCliked(card) {
   if (!clicked) {
     clicked = card.srcElement.attributes.value.value;
@@ -96,13 +117,13 @@ function checkCliked(card) {
       cardsFlip = [];
       clicked = null;
       clicked2 = null;
-    }, 1600);
+    }, 1005);
   }
 }
+
+//* Timer generator
 function timer() {
-  const timer = document.createElement("h2");
-  timer.innerHTML = "<span id='minutes'></span> : <span id='seconds'></span>";
-  header.appendChild(timer);
+  h2.innerHTML = "<span id='minutes'></span> : <span id='seconds'></span>";
 
   const minutes = document.getElementById("minutes");
   const seconds = document.getElementById("seconds");
@@ -116,44 +137,49 @@ function timer() {
     }
   }, 1000);
 }
+//* Even cards left generator
 function evenLeft() {
-  var scores = document.createElement("h3");
-  scores.innerHTML = "<span id='left'></span> / 18";
-  header.appendChild(scores);
+  h3.innerHTML = "<span id='left'></span> / 18";
 
   cardLeft = document.getElementById("left");
   cardLeft.textContent = 0;
 }
+//* Manage events after a game
 function endGame() {
-  clearInterval(timeInt);
-  document.querySelector("header > h1").style.color = "#ffc700";
+  fruits.forEach((fruit) => {
+    fruit.addEventListener("click", () => {
+      const spanLeft = document.getElementById("left").textContent;
+      if (spanLeft === "1") {
+        clearInterval(timeInt);
+        recordsSection();
+      }
+    });
+  });
 }
-// TODO EXECUTIONS
-// TODO EXECUTIONS
-// TODO EXECUTIONS
-// Create game section and remove records section
+
+function recordsSection() {
+  const records = document.createElement("section");
+  h3.textContent = h2.textContent + " s";
+  h2.textContent = "You won";
+  records.setAttribute("id", "records");
+
+  document.getElementById("grid").remove();
+  main.appendChild(records);
+  main.appendChild(startButton);
+  startButton.style.display = "block";
+  document.querySelector("button > a").textContent = "Try Again";
+}
+//! !!!!!!!!!! !//
+//! EXECUTIONS !//
+//! !!!!!!!!!! !//
+
+//* Events on start click
 startButton.addEventListener("click", (e) => {
   e.preventDefault();
 
   launchGame();
-  generateCards();
+  gameLogic();
+  hud();
+  endGame();
+  startButton.style.display = "none";
 });
-// Create timer & scoresbord
-startButton.addEventListener("click", () => {
-  fruits.forEach((fruit) => {
-    fruit.addEventListener("click", (e) => {
-      if (cardsFlip.length < 2) {
-        cardsFlip.push(fruit);
-        flipCards(fruit);
-        checkCliked(e);
-        document.getElementById("left").textContent === "18" ? endGame() : null;
-      }
-    });
-  });
-  timer();
-  evenLeft();
-  document.getElementById("left").addEventListener("click", (e) => {
-    console.log(e);
-  });
-});
-
