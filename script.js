@@ -81,7 +81,7 @@ function checkCard(clicked, clicked2) {
     setTimeout(() => {
       flipCards(cardsFlip[0]);
       flipCards(cardsFlip[1]);
-    }, 1500);
+    }, 1000);
   }
 }
 
@@ -146,12 +146,14 @@ startButton.addEventListener("click", () => {
         cardsFlip.push(fruit);
         flipCards(fruit);
         checkCliked(e);
-        document.getElementById("left").textContent === "1"
-          ? endGame()
-          : console.log(left);
+        document.getElementById("left").textContent === "18" ? endGame() : null;
       }
     });
   });
   timer();
   evenLeft();
+  document.getElementById("left").addEventListener("click", (e) => {
+    console.log(e);
+  });
 });
+
