@@ -125,8 +125,8 @@ function checkCliked(card) {
 function timer() {
   h2.innerHTML = "<span id='minutes'></span> : <span id='seconds'></span>";
 
-  const minutes = document.getElementById("minutes");
-  const seconds = document.getElementById("seconds");
+  let minutes = document.getElementById("minutes");
+  let seconds = document.getElementById("seconds");
   timeInt = setInterval(() => {
     seconds.textContent++;
     maxSec = parseInt(seconds.textContent);
@@ -135,7 +135,7 @@ function timer() {
       seconds.textContent = 0;
       minutes.textContent++;
     }
-  }, 1000);
+  }, 100);
 }
 //* Even cards left generator
 function evenLeft() {
@@ -151,23 +151,25 @@ function endGame() {
       const spanLeft = document.getElementById("left").textContent;
       if (spanLeft === "1") {
         clearInterval(timeInt);
-        recordsSection();
+        // recordAndDate();
+        location.assign(
+          `index.php?date=${recordAndDate()[0]}&record=${recordAndDate()[1]}`
+        );
       }
     });
   });
 }
+function recordAndDate() {
+  if (minutes.textContent < 1) {
+    minutes.textContent = 00;
+  } else if(minutes.textContent > 0 &&)
+  record = `${minutes.textContent}.${seconds.textContent}`;
 
-function recordsSection() {
-  const records = document.createElement("section");
-  h3.textContent = h2.textContent + " s";
-  h2.textContent = "You won";
-  records.setAttribute("id", "records");
-
-  document.getElementById("grid").remove();
-  main.appendChild(records);
-  main.appendChild(startButton);
-  startButton.style.display = "block";
-  document.querySelector("button > a").textContent = "Try Again";
+  let date = Date.now();
+  date = new Date(date);
+  let option = { year: "numeric", month: "long", day: "numeric" };
+  date = date.toLocaleDateString("fr-FR", option);
+  return [date, record];
 }
 //! !!!!!!!!!! !//
 //! EXECUTIONS !//

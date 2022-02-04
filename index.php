@@ -1,4 +1,9 @@
-<?php require_once 'assets\PHP\records.php';?>
+<?php
+isset($_GET['record']) ?
+require 'assets\PHP\insert_record.php' : null;
+require_once 'assets\PHP\records.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,8 +17,8 @@
   <body>
     <header>
       <h1>Memories</h1>
-      <h2></h2>
-      <h3></h3>
+      <h2><?=isset($_GET['record']) ? 'You won' : null;?></h2>
+      <h3><?=isset($_GET['record']) ? $_GET['record'] : null;?></h3>
     </header>
     <main>
       <section id="records">
