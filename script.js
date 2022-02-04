@@ -135,7 +135,7 @@ function timer() {
       seconds.textContent = 0;
       minutes.textContent++;
     }
-  }, 100);
+  }, 1000);
 }
 //* Even cards left generator
 function evenLeft() {
@@ -144,14 +144,13 @@ function evenLeft() {
   cardLeft = document.getElementById("left");
   cardLeft.textContent = 0;
 }
-//* Manage events after a game
+//* Manage events after a game (METHODE GET)
 function endGame() {
   fruits.forEach((fruit) => {
     fruit.addEventListener("click", () => {
       const spanLeft = document.getElementById("left").textContent;
       if (spanLeft === "1") {
         clearInterval(timeInt);
-        // recordAndDate();
         location.assign(
           `index.php?date=${recordAndDate()[0]}&record=${recordAndDate()[1]}`
         );
@@ -159,21 +158,30 @@ function endGame() {
     });
   });
 }
+//* Edit and manage date and record for the INSERT request
 function recordAndDate() {
-  if (minutes.textContent < 1) {
-    minutes.textContent = 00;
-  } else if(minutes.textContent > 0 &&)
-  record = `${minutes.textContent}.${seconds.textContent}`;
+  //! Manage seconds timer
+  if (seconds.textContent < 10) {
+    seconds.textContent = "0" + parseInt(seconds.textContent);
+  }
 
+  //! Manage minutes timer
+  if (minutes.textContent < 1) {
+    minutes.textContent = "00";
+  } else if (minutes.textContent > 0 && minutes.textContent < 10) {
+    minutes.textContent = "0" + parseInt(minutes.textContent);
+  }
+
+  record = `${minutes.textContent}.${seconds.textContent}`;
   let date = Date.now();
   date = new Date(date);
   let option = { year: "numeric", month: "long", day: "numeric" };
   date = date.toLocaleDateString("fr-FR", option);
   return [date, record];
 }
-//! !!!!!!!!!! !//
-//! EXECUTIONS !//
-//! !!!!!!!!!! !//
+//~ ~~~~~~~~~~ ~//
+//~ EXECUTIONS ~//
+//~ ~~~~~~~~~~ ~//
 
 //* Events on start click
 startButton.addEventListener("click", (e) => {
