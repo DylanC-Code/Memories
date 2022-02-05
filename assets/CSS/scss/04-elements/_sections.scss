@@ -16,11 +16,17 @@
     font-family: Megrim;
     color: $green-font;
 
+    @media #{$media-down-xl} {
+      width: 80%;
+    }
     > h1 {
       font-size: rem(30);
     }
     > h2 {
       font-size: rem(45);
+      @media #{$media-down-md} {
+        font-size: rem(35);
+      }
     }
   }
 }
@@ -30,4 +36,12 @@
   display: grid;
   grid-template-columns: repeat(6, 100px);
   gap: 2rem;
+
+  @media #{$media-down-xl} {
+    margin: 5vh 20%;
+  }
+  @media #{$media-down-lg} {
+    margin: 5vh 10%;
+    grid-template-columns: repeat(4, 100px);
+  }
 }

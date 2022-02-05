@@ -9,13 +9,21 @@ header {
   h1 {
     color: $white;
     font: 3.5rem $font-secondary;
+    @media #{$media-down-lg} {
+      font: 3rem $font-secondary;
+    }
   }
   h2 {
-    // margin: 1.5rem 0 2rem 38%;
     color: $white;
     font: 3.5rem $font-primary;
+    @media #{$media-down-lg} {
+      font: 2.5rem $font-primary;
+    }
   }
   h3 {
     @extend h2;
+    @media #{$media-down-lg} {
+      font: 2.5rem $font-primary;
+    }
   }
 }

@@ -55,10 +55,26 @@ header h1 {
   color: #ffffff;
   font: 3.5rem "Dancing Script";
 }
+@media only screen and (max-width: 992px) {
+  header h1 {
+    font: 3rem "Dancing Script";
+  }
+}
 header h2, header h3 {
   color: #ffffff;
   font: 3.5rem "Megrim";
 }
+@media only screen and (max-width: 992px) {
+  header h2, header h3 {
+    font: 2.5rem "Megrim";
+  }
+}
+@media only screen and (max-width: 992px) {
+  header h3 {
+    font: 2.5rem "Megrim";
+  }
+}
+
 #records {
   padding: 3rem 5rem;
 }
@@ -78,11 +94,21 @@ header h2, header h3 {
   font-family: Megrim;
   color: #008b01;
 }
+@media only screen and (max-width: 1200px) {
+  #records article {
+    width: 80%;
+  }
+}
 #records article > h1 {
   font-size: 1.875rem;
 }
 #records article > h2, #records header article > h3, header #records article > h3 {
   font-size: 2.8125rem;
+}
+@media only screen and (max-width: 768px) {
+  #records article > h2, #records header article > h3, header #records article > h3 {
+    font-size: 2.1875rem;
+  }
 }
 
 #grid {
@@ -90,6 +116,17 @@ header h2, header h3 {
   display: grid;
   grid-template-columns: repeat(6, 100px);
   gap: 2rem;
+}
+@media only screen and (max-width: 1200px) {
+  #grid {
+    margin: 5vh 20%;
+  }
+}
+@media only screen and (max-width: 992px) {
+  #grid {
+    margin: 5vh 10%;
+    grid-template-columns: repeat(4, 100px);
+  }
 }
 
 button {
