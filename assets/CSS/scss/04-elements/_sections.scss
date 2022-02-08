@@ -32,16 +32,16 @@
 }
 
 #grid {
-  margin: 5vh 30%;
+  margin: auto;
   display: grid;
   grid-template-columns: repeat(6, 100px);
   gap: 2rem;
 
   @media #{$media-down-xl} {
-    margin: 5vh 20%;
+    // margin: 5vh 20%;
   }
   @media #{$media-down-lg} {
-    margin: 5vh 10%;
+    // margin: 5vh 10%;
     grid-template-columns: repeat(4, 100px);
   }
 }

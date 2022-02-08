@@ -1,0 +1,4 @@
+.main-flex {
+  padding: 2rem 5rem 0;
+  @include align-objects(flex, top, space-between);
+}

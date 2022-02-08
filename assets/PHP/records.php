@@ -15,7 +15,7 @@ foreach ($query as $record) {?>
   <button>
     <a href=""><?=$button?></a>
   </button>
-  <div class="player">2</div>
+  <div class="player" value='multi'>2</div>
 </div>
 
 <?php $records = ob_get_clean();

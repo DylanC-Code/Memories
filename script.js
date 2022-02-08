@@ -6,11 +6,14 @@ const h2 = document.querySelector("header > h2");
 const h3 = document.querySelector("header > h3");
 const main = document.querySelector("main");
 const startButton = document.querySelector("button");
+const multiplayer = document.querySelectorAll(".player");
+const player1 = document.querySelector(".player:nth-of-type(1)");
+const player2 = document.querySelector(".player:nth-of-type(2)");
 
 let fruits = [];
 let cardsFlip = [];
 let longueur = fruits.length;
-let clicked, clicked2, timeInt;
+let clicked, clicked2, timeInt, multi;
 
 //^ ^^^^^^^^ ^//
 //^ FUNCTION ^//
@@ -18,12 +21,7 @@ let clicked, clicked2, timeInt;
 
 //~ MASTER FUNCTIONS
 function launchGame() {
-  game_section = document.createElement("section");
-  game_section.setAttribute("id", "grid");
-  document.querySelector("body").appendChild(game_section);
-  document.querySelector("#records").remove();
-  fruits = [];
-
+  createGrid();
   generateCards();
 }
 function gameLogic() {
@@ -76,6 +74,7 @@ function randomizeArray(array) {
 }
 // * Create and generate memories cards
 function generateCards() {
+  fruits = [];
   for (let i = 0; i < 18; i++) {
     card = document.createElement("div");
     card.setAttribute("value", i + 1);
@@ -134,6 +133,20 @@ function checkCliked(card) {
   }
 }
 
+//* Create grid and manage it if multiplayer was chose
+function createGrid() {
+  document.querySelector("#records").remove();
+  game_section = document.createElement("section");
+  game_section.setAttribute("id", "grid");
+  main.appendChild(game_section);
+  main.classList.add("main-flex");
+
+  div2 = document.querySelector("main .player:nth-of-type(2)");
+  if (div2) {
+    div2.remove();
+    main.appendChild(div2);
+  }
+}
 //* Timer generator
 function timer() {
   h2.innerHTML = "<span id='minutes'></span> : <span id='seconds'></span>";
@@ -179,6 +192,41 @@ function recordAndDate() {
   date = date.toLocaleDateString("fr-FR", option);
   return [date, record];
 }
+
+function multiplayerOptions() {
+  multiplayerHUD();
+}
+//* Manage the logic behind multiplayer buttons
+function choosePlayers() {
+  const buttons = document.querySelectorAll(".player");
+
+  //! Asset a value to $multi variable
+  buttons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      if (multi === "multi") {
+        multi = null;
+      } else {
+        multi = e.target.getAttribute("value");
+      }
+
+      //! Toggle the active class on clicked button
+      document.querySelectorAll(".player").forEach((button) => {
+        button.classList.toggle("active");
+      });
+    });
+  });
+}
+//* Generate an different HUD if multiplayer was chose
+function multiplayerHUD() {
+  if (multi === "multi") {
+    main.appendChild(player1);
+    main.appendChild(player2);
+    player1.classList.add("active");
+    player2.classList.remove("active");
+    player1.style.pointerEvents = "none";
+    player2.style.pointerEvents = "none";
+  }
+}
 //~ ~~~~~~~~~~ ~//
 //~ EXECUTIONS ~//
 //~ ~~~~~~~~~~ ~//
@@ -187,8 +235,12 @@ function recordAndDate() {
 startButton.addEventListener("click", (e) => {
   e.preventDefault();
 
+  multiplayerOptions();
+
   launchGame();
   gameLogic();
   hud();
   endGame();
 });
+
+choosePlayers();
