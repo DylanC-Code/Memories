@@ -41,6 +41,19 @@ function hud() {
   timer();
   evenLeft();
 }
+function endGame() {
+  fruits.forEach((fruit) => {
+    fruit.addEventListener("click", () => {
+      const spanLeft = document.getElementById("left").textContent;
+      if (spanLeft === "1") {
+        clearInterval(timeInt);
+        location.assign(
+          `index.php?date=${recordAndDate()[0]}&record=${recordAndDate()[1]}`
+        );
+      }
+    });
+  });
+}
 
 //~ ROOT FUNCTIONS
 // * An algorythm for shuffle an array(create by myself)
@@ -68,7 +81,7 @@ function generateCards() {
     card.setAttribute("value", i + 1);
     card.style.background = `0% ${
       100 * -i
-    }px no-repeat url(./assets/medias/fruits/cards.png)`;
+    }px no-repeat url(./assets/image/cards.png)`;
     card.classList.add("card");
     card.classList.add("backcard");
     fruits.push(card);
@@ -144,20 +157,6 @@ function evenLeft() {
   cardLeft = document.getElementById("left");
   cardLeft.textContent = 0;
 }
-//* Manage events after a game (METHODE GET)
-function endGame() {
-  fruits.forEach((fruit) => {
-    fruit.addEventListener("click", () => {
-      const spanLeft = document.getElementById("left").textContent;
-      if (spanLeft === "1") {
-        clearInterval(timeInt);
-        location.assign(
-          `index.php?date=${recordAndDate()[0]}&record=${recordAndDate()[1]}`
-        );
-      }
-    });
-  });
-}
 //* Edit and manage date and record for the INSERT request
 function recordAndDate() {
   //! Manage seconds timer
@@ -173,6 +172,7 @@ function recordAndDate() {
   }
 
   record = `${minutes.textContent}.${seconds.textContent}`;
+
   let date = Date.now();
   date = new Date(date);
   let option = { year: "numeric", month: "long", day: "numeric" };
@@ -191,5 +191,4 @@ startButton.addEventListener("click", (e) => {
   gameLogic();
   hud();
   endGame();
-  startButton.style.display = "none";
 });

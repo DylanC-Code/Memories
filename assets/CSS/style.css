@@ -129,11 +129,18 @@ header h2, header h3 {
   }
 }
 
+.container {
+  margin: 4rem auto;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 button {
   position: relative;
   width: 300px;
   height: 80px;
-  margin: 4rem auto 0;
   background: transparent;
   display: block;
 }
@@ -277,6 +284,27 @@ button:hover a {
   100% {
     background: none;
   }
+}
+.player {
+  width: 80px;
+  height: 80px;
+  border-radius: 15px;
+  background-color: #ffc800ad;
+  opacity: 0.6;
+  cursor: pointer;
+  font: 3rem "Dancing Script";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.player:hover {
+  opacity: 1;
+}
+
+.active {
+  opacity: 1;
+  border: 4px groove #ffc700;
+  background: #86e387;
 }
 
 /*# sourceMappingURL=style.css.map */

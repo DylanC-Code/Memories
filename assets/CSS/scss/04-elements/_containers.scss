@@ -1,0 +1,5 @@
+.container {
+  margin: 4rem auto;
+  width: 80%;
+  @include align-objects(flex, center, space-between);
+}

@@ -10,8 +10,12 @@ foreach ($query as $record) {?>
   <h2><?=$record['date']?></h2>
 </article>
 <?php }?>
-<button>
-  <a href=""><?=$button?></a>
-</button>
+<div class="container">
+  <div class="player active">1</div>
+  <button>
+    <a href=""><?=$button?></a>
+  </button>
+  <div class="player">2</div>
+</div>
 
 <?php $records = ob_get_clean();

@@ -1,27 +1,27 @@
-@function strip-unit ($number) {
-  @if type-of($number) == 'number' and not unitless($number) {
-      @return $number / ($number * 0 + 1);
+@function strip-unit($number) {
+  @if type-of($number) == "number" and not unitless($number) {
+    @return $number / ($number * 0 + 1);
   }
   @return $number;
 }
 
-@function em ($size, $base: $font-size) {
+@function em($size, $base: $font-size) {
   @return strip-unit($size / $base) * 1em;
 }
 
-@function rem ($size, $base: $font-size) {
+@function rem($size, $base: $font-size) {
   @return strip-unit($size / $base) * 1rem;
 }
 
-@function difference ($number1, $number2) {
+@function difference($number1, $number2) {
   @return strip-unit($number1) - strip-unit($number2);
 }
 
-@function time ($number1, $number2) {
+@function time($number1, $number2) {
   @return strip-unit($number1) * strip-unit($number2);
 }
 
-@function quotient ($number1, $number2) {
+@function quotient($number1, $number2) {
   @return strip-unit($number1) / strip-unit($number2);
 }
 

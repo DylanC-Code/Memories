@@ -2,7 +2,6 @@ button {
   position: relative;
   width: 300px;
   height: 80px;
-  margin: 4rem auto 0;
   background: transparent;
   display: block;
   &::before {
@@ -14,8 +13,6 @@ button {
     left: 50%;
     transform: translateX(-50%);
     background: transparent;
-    // box-shadow: 0 0 5px $green, 0 0 15px $green, 0 0 30px $green,
-    //   0 0 60px $green;
     border-radius: 15px;
     transition: 0.7s;
   }

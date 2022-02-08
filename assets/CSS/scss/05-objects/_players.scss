@@ -1,0 +1,19 @@
+.player {
+  width: 80px;
+  height: 80px;
+  border-radius: 15px;
+  background-color: $yellow;
+  opacity: 0.6;
+  cursor: pointer;
+  font: 3rem $font-secondary;
+  @include align-objects(flex, center, center);
+
+  &:hover {
+    opacity: 1;
+  }
+}
+.active {
+  opacity: 1;
+  border: 4px groove $gold;
+  background: $green;
+}
