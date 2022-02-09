@@ -17,6 +17,8 @@ Create a memory game on the web.
 It will use fruit for cards, timer and remaining pair counter.
 The top five will be show before and after the games.
 
+I'll choose to add new feature like multiplayer option(timer and scoreboard for eachother)
+
 ## Requirements imposed
 
 ---
