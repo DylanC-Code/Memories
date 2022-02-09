@@ -8,8 +8,6 @@ const h3 = document.querySelector("header > h3");
 const main = document.querySelector("main");
 const startButton = document.querySelector("button");
 const multiplayer = document.querySelectorAll(".player");
-const player1 = document.querySelector(".player:nth-of-type(1)");
-const player2 = document.querySelector(".player:nth-of-type(2)");
 
 let fruits = [];
 let cardsFlip = [];
@@ -33,6 +31,7 @@ function gameLogic() {
         cardsFlip.push(fruit);
         flipCards(fruit);
         checkCliked(e);
+        endGame();
       }
     });
   });
@@ -40,7 +39,7 @@ function gameLogic() {
 function hud() {
   multi !== "multi" ? soloHUD() : multiplayerHUD();
 }
-// ! CORRIGER END GAME
+// ! PEUT MIEUX FAIRE
 function endGame() {
   multi !== "multi" ? endGameSolo() : endGameMulti();
 }
@@ -89,6 +88,8 @@ function generateCards() {
 }
 //* Edit and manage date and record for the INSERT request
 function recordAndDate() {
+  seconds = document.querySelector("span[class=seconds]");
+  minutes = document.querySelector("span[class=minutes]");
   //! Manage seconds timer
   if (seconds.textContent < 10) {
     seconds.textContent = "0" + parseInt(seconds.textContent);
@@ -204,37 +205,6 @@ function choosePlayers() {
     });
   });
 }
-function endGameSolo() {
-  fruits.forEach((fruit) => {
-    fruit.addEventListener("click", () => {
-      const spanLeft = document.getElementById("left").textContent;
-      if (spanLeft === "1") {
-        clearInterval(timeInt);
-        location.assign(
-          `index.php?date=${recordAndDate()[0]}&record=${recordAndDate()[1]}`
-        );
-      }
-    });
-  });
-}
-//! ENDGAMEMULTI TO FINISH
-//! ENDGAMEMULTI TO FINISH
-//! ENDGAMEMULTI TO FINISH
-function endGameMulti() {
-  score1 = parseInt(document.getElementById("player1").textContent);
-  score2 = parseInt(document.getElementById("player2").textContent);
-  totalEven = score1 + score2;
-
-  if (totalEven === 18) {
-    if (score1 < score2) {
-      h2.textContent = "Player  win with " + score2 + "even";
-    } else if (score1 > score2) {
-      h2.textContent = "Player 1 win with " + score1 + "even";
-    } else {
-      h2.textContent = "Egality";
-    }
-  }
-}
 //~~ OTHER FUNCTIONS
 //~~~~~~~~~~~~~~~~~~
 // * An algorythm for shuffle an array(create by myself)
@@ -256,6 +226,67 @@ function randomizeArray(array) {
   }
 }
 
+//^^ ENDGAME
+//~~ MASTER ENDGAME FUNCTION
+//~~~~~~~~~~~~~~~~~~~~~~
+//* Manage de endGame if the game is solo
+function endGameSolo() {
+  fruits.forEach((fruit) => {
+    fruit.addEventListener("click", () => {
+      const spanLeft = document.getElementById("left").textContent;
+      if (spanLeft === "1") {
+        clearInterval(timeInt);
+        location.assign(
+          `index.php?date=${recordAndDate()[0]}&record=${recordAndDate()[1]}`
+        );
+      }
+    });
+  });
+}
+//* Manage de endGame if the game is multiplayer
+function endGameMulti() {
+  endWithScore();
+}
+//~~~~ MULTI
+//* The logic of the endGame with the scoreboard
+function endWithScore() {
+  score1 = parseInt(document.getElementById("player1").textContent);
+  score2 = parseInt(document.getElementById("player2").textContent);
+  totalEven = score1 + score2;
+
+  if (totalEven === 2) {
+    clearInterval(timeInt);
+    if (score1 < score2) {
+      h2.textContent = "Player win with " + score2 + "even";
+    } else if (score1 > score2) {
+      h2.textContent = "Player 1 win with " + score1 + "even";
+    } else if (score1 === score2) {
+      endWithTime()[0] < endWithTime()[1]
+        ? (h2.textContent = "Player 2 Win")
+        : (h2.textContent = "Player 1 Win");
+    }
+  }
+}
+//* The logic of the endGame with the timer
+function endWithTime() {
+  let player1 =
+    document.getElementById("minutesPlayer1").textContent +
+    document.getElementById("secondsPlayer1").textContent;
+  let player2 =
+    document.getElementById("minutesPlayer2").textContent +
+    document.getElementById("secondsPlayer2").textContent;
+
+  if (player1 == 0 && player2 == 0) {
+    endWithScore();
+  } else if (player1 == player2) {
+    clearInterval(timeInt);
+    h2.textContent = "Equality";
+  } else {
+    clearInterval(timeInt);
+    return [player1, player2];
+  }
+}
+
 //^^ HUD
 //~~ MASTER HUD FUNCTION
 //~~~~~~~~~~~~~~~~~~~~~~
@@ -265,6 +296,8 @@ function soloHUD() {
   evenLeft();
 }
 function multiplayerHUD() {
+  h2.textContent = "";
+  h3.textContent = "";
   createContainers();
   generateLogoPlayers();
   generateMultiTimer();
@@ -301,7 +334,12 @@ function createContainers() {
   for (p = 0; p < 2; p++) {
     const playerContainer = document.createElement("div");
     playerContainer.classList.add("baby-container");
-    main.appendChild(playerContainer);
+    if (p == 1) {
+      launchGame();
+      main.appendChild(playerContainer);
+    } else {
+      main.appendChild(playerContainer);
+    }
   }
 }
 function generateLogoPlayers() {
@@ -334,8 +372,8 @@ function generateMultiTimer() {
     let minutes = document.querySelector(`#minutesPlayer${b + 1}`);
     let seconds = document.querySelector(`#secondsPlayer${b + 1}`);
 
-    minutes.textContent = "2";
-    seconds.textContent = "00";
+    minutes.textContent = "0";
+    seconds.textContent = "5";
   }
   player = true;
 }
@@ -357,10 +395,10 @@ function generateScores() {
 startButton.addEventListener("click", (e) => {
   e.preventDefault();
 
-  launchGame();
+  multi !== "multi" ? launchGame() : null;
 
-  gameLogic();
   hud();
+  gameLogic();
   endGame();
 });
 
