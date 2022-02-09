@@ -234,7 +234,7 @@ function endGameSolo() {
   fruits.forEach((fruit) => {
     fruit.addEventListener("click", () => {
       const spanLeft = document.getElementById("left").textContent;
-      if (spanLeft === "1") {
+      if (spanLeft === "18") {
         clearInterval(timeInt);
         location.assign(
           `index.php?date=${recordAndDate()[0]}&record=${recordAndDate()[1]}`
@@ -254,7 +254,7 @@ function endWithScore() {
   score2 = parseInt(document.getElementById("player2").textContent);
   totalEven = score1 + score2;
 
-  if (totalEven === 2) {
+  if (totalEven === 18) {
     clearInterval(timeInt);
     if (score1 < score2) {
       h2.textContent = "Player win with " + score2 + "even";
@@ -372,8 +372,8 @@ function generateMultiTimer() {
     let minutes = document.querySelector(`#minutesPlayer${b + 1}`);
     let seconds = document.querySelector(`#secondsPlayer${b + 1}`);
 
-    minutes.textContent = "0";
-    seconds.textContent = "5";
+    minutes.textContent = "2";
+    seconds.textContent = "00";
   }
   player = true;
 }

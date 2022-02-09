@@ -4,7 +4,17 @@
   @include align-objects(flex, center, space-between);
 }
 .baby-container {
+  display: grid;
+  grid-template: repeat(2, 1fr) / repeat(2, 1fr);
   width: 400px;
   height: 400px;
-  border: 1px solid black;
+  & > div {
+    grid-area: 1 /1 / 2/ 3;
+    justify-self: center;
+  }
+  & > h2,
+  & > h3 {
+    justify-self: center;
+    font: 900 3rem $font-primary;
+  }
 }

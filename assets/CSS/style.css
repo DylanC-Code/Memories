@@ -132,9 +132,18 @@ header h2, header h3 {
 }
 
 .baby-container {
+  display: grid;
+  grid-template: repeat(2, 1fr)/repeat(2, 1fr);
   width: 400px;
   height: 400px;
-  border: 1px solid black;
+}
+.baby-container > div {
+  grid-area: 1/1/2/3;
+  justify-self: center;
+}
+.baby-container > h2, header .baby-container > h3, .baby-container > h3 {
+  justify-self: center;
+  font: 900 3rem "Megrim";
 }
 
 .main-flex {
